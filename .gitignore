@@ -1,0 +1,7 @@
+.vscode
+__pycache__
+log
+temp*
+README.json
+README.html
+README.tex
