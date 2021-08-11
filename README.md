@@ -29,12 +29,12 @@ pip install pandocfilters
 
 Write your complex tables in HTML in `tables.html` and in LaTeX in `tables.tex`.
 <https://tablesgenerator.com> is a good resource for constructing complex tables.
-To insert the right tables into the output HTML/LaTeX document, 
+To insert tables into the output HTML/LaTeX document, 
 use the syntax `<COMMENT> tbl:table-id <COMMENT>` to mark the beginning and
-`<COMMENT> END <COMMENT>` to mark the end of the table definition in `tables.html` and `tables.tex`.
-`<COMMENT>` corresponds to `%` in LaTeX and `<!--` (opening) `-->` (closing) in HTML. 
+`<COMMENT> END <COMMENT>` to mark the end of a table definition in `tables.html` and `tables.tex`.
+`<COMMENT>` corresponds to `%` in LaTeX and `<!--` and `-->` in HTML. 
 `tbl:table-id` is the identifier of the table used for cross-referencing in the markdown source. 
-Refer to [pandoc-crossref][crossref]'s syntax for details.
+Refer to [pandoc-crossref][crossref] for details of cross referencing tables.
 
 To compile the documents, apply the filter `custom-table.py` **AFTER** `pandoc--crossref` in the command line.
 

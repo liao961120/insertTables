@@ -165,19 +165,19 @@ required:
 
 Write your complex tables in HTML in \texttt{tables.html} and in LaTeX
 in \texttt{tables.tex}. \url{https://tablesgenerator.com} is a good
-resource for constructing complex tables. To insert the right tables
-into the output HTML/LaTeX document, use the syntax
+resource for constructing complex tables. To insert tables into the
+output HTML/LaTeX document, use the syntax
 \texttt{\textless{}COMMENT\textgreater{}\ tbl:table-id\ \textless{}COMMENT\textgreater{}}
 to mark the beginning and
 \texttt{\textless{}COMMENT\textgreater{}\ END\ \textless{}COMMENT\textgreater{}}
-to mark the end of the table definition in \texttt{tables.html} and
+to mark the end of a table definition in \texttt{tables.html} and
 \texttt{tables.tex}. \texttt{\textless{}COMMENT\textgreater{}}
-corresponds to \texttt{\%} in LaTeX and \texttt{\textless{}!-\/-}
-(opening) \texttt{-\/-\textgreater{}} (closing) in HTML.
-\texttt{tbl:table-id} is the identifier of the table used for
-cross-referencing in the markdown source. Refer to
-\href{https://github.com/lierdakil/pandoc-crossref}{pandoc-crossref}'s
-syntax for details.
+corresponds to \texttt{\%} in LaTeX and \texttt{\textless{}!-\/-} and
+\texttt{-\/-\textgreater{}} in HTML. \texttt{tbl:table-id} is the
+identifier of the table used for cross-referencing in the markdown
+source. Refer to
+\href{https://github.com/lierdakil/pandoc-crossref}{pandoc-crossref} for
+details of cross referencing tables.
 
 To compile the documents, apply the filter \texttt{custom-table.py}
 \textbf{AFTER} \texttt{pandoc-\/-crossref} in the command line.
