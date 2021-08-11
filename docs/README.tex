@@ -88,10 +88,13 @@
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
+% Make links footnotes instead of hotlinks:
+\DeclareRobustCommand{\href}[2]{#2\footnote{\url{#1}}}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{multirow}
 \makeatletter
 \@ifpackageloaded{subfig}{}{\usepackage{subfig}}
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
@@ -192,11 +195,11 @@ To compile the documents, apply the filter \texttt{custom-table.py}
 %%%%%%% tbl:custom-table %%%%%%%%
 % \usepackage{multirow}
 \begin{table}[]
-    \begin{tabular}{@{}lll@{}}
-    \toprule
-    \textbf{} & \multicolumn{2}{l}{Column Span} \\ \midrule
-    \multirow{2}{*}{Row Span} & a & b \\
-     & c & d \\ \cmidrule(l){2-3} 
+    \begin{tabular}{lllll}
+    \hline
+    \textbf{} & \multicolumn{4}{l}{Column Span} \\ \hline
+    \multirow{2}{*}{Row Span} & a & b & d & f \\
+     & c & d & e & g \\ \hline
     \end{tabular}
 \caption{\label{tbl:custom-table}This is a \emph{complex table}, \textbf{written} in \texttt{tables.tex} and \texttt{tables.html}.}\end{table}
 

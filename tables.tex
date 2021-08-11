@@ -1,11 +1,11 @@
 %%%%%%% tbl:custom-table %%%%%%%%
 % \usepackage{multirow}
 \begin{table}[]
-    \begin{tabular}{@{}lll@{}}
-    \toprule
-    \textbf{} & \multicolumn{2}{l}{Column Span} \\ \midrule
-    \multirow{2}{*}{Row Span} & a & b \\
-     & c & d \\ \cmidrule(l){2-3} 
+    \begin{tabular}{lllll}
+    \hline
+    \textbf{} & \multicolumn{4}{l}{Column Span} \\ \hline
+    \multirow{2}{*}{Row Span} & a & b & d & f \\
+     & c & d & e & g \\ \hline
     \end{tabular}
 \end{table}
 %%%%%%% END %%%%%%%%

@@ -1,7 +1,9 @@
 ---
 title: "Pandoc Filter to Insert Arbitrary Complex Tables"
 linkReferences: true
-link-as-notes: true
+links-as-notes: true
+header-includes: |
+    \usepackage{multirow}
 ---
 
 Outputs: 
