@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Pandoc filter to insert complex LaTeX/HTML tables</title>
+  <title>Pandoc Filter to Insert Arbitrary Complex Tables</title>
   <style>
     html {
       line-height: 1.5;
@@ -214,9 +214,9 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Pandoc filter to insert complex LaTeX/HTML tables</h1>
+<h1 class="title">Pandoc Filter to Insert Arbitrary Complex Tables</h1>
 </header>
-<h1 id="pandoc-filter-to-insert-complex-latexhtml-tables">Pandoc filter to insert complex LaTeX/HTML tables</h1>
+<h1 id="pandoc-filter-to-insert-arbitrary-complex-tables">Pandoc Filter to Insert Arbitrary Complex Tables</h1>
 <h2 id="dependencies">Dependencies</h2>
 <p>Make sure you have Pandoc and <a href="https://github.com/lierdakil/pandoc-crossref">pandoc-crossref</a> installed (callable from cmd). In addition, Python 3 and the libraries below are required:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandocfilters, pypandoc</span></code></pre></div>
@@ -226,8 +226,8 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-F</span> pandoc-crossref <span class="at">-F</span> custom-table.py README.md <span class="at">-o</span> README.tex</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-F</span> pandoc-crossref <span class="at">-F</span> custom-table.py README.md <span class="at">-o</span> README.html</span></code></pre></div>
 <h2 id="example">Example</h2>
-<!-- tbl:table -->
-<table id="tbl:table"><caption>Table 1: This is a <em>complex table</em>, check source in <code>tables.tex</code> and <code>tables.html</code>. 
+<!-- tbl:custom-table -->
+<table id="tbl:custom-table"><caption>Table 1: This is a <em>complex table</em>, written in <code>tables.tex</code> and <code>tables.html</code>.
 </caption>
   <thead>
     <tr>
@@ -252,8 +252,10 @@
   </tbody>
   </table>
 
-<p>See tbl. <a href="#tbl:table">1</a>.</p>
+<p>See tbl. <a href="#tbl:custom-table">1</a>.</p>
+<div id="tbl:normal-table">
 <table>
+<caption>Table 2: This is a normal table written in markdown, which will not be replaced.</caption>
 <thead>
 <tr class="header">
 <th>Column A</th>
@@ -271,5 +273,6 @@
 </tr>
 </tbody>
 </table>
+</div>
 </body>
 </html>

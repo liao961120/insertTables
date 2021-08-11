@@ -1,9 +1,9 @@
 ---
-title: "Pandoc filter to insert complex LaTeX/HTML tables"
+title: "Pandoc Filter to Insert Arbitrary Complex Tables"
 linkReferences: true
 ---
 
-# Pandoc filter to insert complex LaTeX/HTML tables
+# Pandoc Filter to Insert Arbitrary Complex Tables 
 
 ## Dependencies
 
@@ -33,12 +33,14 @@ pandoc -F pandoc-crossref -F custom-table.py README.md -o README.html
 |-------------|
 | Table       |
 
-Table: This is a _complex table_, check source in `tables.tex` and `tables.html`. CUSTOM.TABLE {#tbl:table}
+Table: This is a _complex table_, written in `tables.tex` and `tables.html`. {#tbl:custom-table}
 
-See @tbl:table.
+See @tbl:custom-table.
 
 
 Column A | Column B
 ---------|---------
 A1       | B1
 A2       | B2
+
+Table: This is a normal table written in markdown, which will not be replaced. {#tbl:normal-table}

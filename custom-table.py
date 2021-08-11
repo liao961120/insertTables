@@ -7,26 +7,18 @@ from pandocfilters import RawBlock, toJSONFilter, walk
 def InsertCustomTables(key, value, format, meta):
     custom_tables = get_custom_tables(format)
 
-    if key == 'Div' and value[0][0].startswith("tbl:"):
-        crossRefLabel = value[0][0]
+    try: crossref = value[0][0]
+    except: return None
+    if key == 'Div' and crossref in custom_tables:
         caption = get_table_caption(value[1][0]["c"], format)
-        table = custom_tables.get(crossRefLabel, None)
-        if table is None: return RawBlock(format, caption)
-        table = insert_caption(caption, table, crossRefLabel, format)
+        table = custom_tables[crossref]
+        table = insert_caption(caption, table, crossref, format)
         return RawBlock(format, table)
 
 
 def get_table_caption(tbl, format):
-    caption_block = tbl[1][1]
-    caption_block = clean_custom_label(caption_block)
-    caption = stringify2(caption_block, format)
+    caption = stringify2(tbl[1][1], format)
     return caption
-
-
-def clean_custom_label(caption_block):
-    def action(key, value, format, meta):
-        if key == 'Str' and value == "CUSTOM.TABLE": return []
-    return walk(caption_block, action, "", {})
 
 
 def stringify2(x, format="html"):
