@@ -103,8 +103,8 @@ def get_custom_tables(format="latex"):
 def insert_caption(caption, table_text, crossRefLabel, format):
     if format == "latex":
         caption = '\\caption{' + caption + '}'
-        tgt = '\\end{table}'
-        repl = caption + '\\end{table}'
+        tgt = '\\begin{tabular}'
+        repl = f"{caption}\n{tgt}"
         return table_text.replace(tgt, repl)
     if format == 'html':
         caption = '<caption>' + caption + '</caption>'
