@@ -34,7 +34,6 @@ use the syntax `<COMMENT> tbl:table-id <COMMENT>` to mark the beginning and
 `tbl:table-id` is the identifier of the table used for cross-referencing in the markdown source. 
 Refer to [pandoc-crossref][crossref]'s syntax for details.
 
-
 To compile the documents, apply the filter `custom-table.py` **AFTER** `pandoc--crossref` in the command line.
 
 ```bash
