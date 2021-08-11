@@ -3,17 +3,24 @@ title: "Pandoc Filter to Insert Arbitrary Complex Tables"
 linkReferences: true
 ---
 
-# Pandoc Filter to Insert Arbitrary Complex Tables 
+Outputs: 
+[Web Page](https://yongfu.name/pandoc-filter/) /
+[LaTeX](https://yongfu.name/pandoc-filter/README.tex) /
+[PDF](https://www.overleaf.com/docs?snip_uri=https://yongfu.name/pandoc-filter/README.tex&engine=xelatex)
+(Overleaf)
+
 
 ## Dependencies
 
-Make sure you have Pandoc and [pandoc-crossref][crossref] installed (callable from cmd). In addition, Python 3 and the libraries below are required:
+Make sure you have Pandoc and [pandoc-crossref][crossref] installed (callable from cmd). 
+In addition, Python 3 and [`pandocfilters`](https://github.com/jgm/pandocfilters) are required:
 
 ```bash
-pip install pandocfilters, pypandoc
+pip install pandocfilters
 ```
 
 [crossref]: https://github.com/lierdakil/pandoc-crossref
+
 
 ## Usage
 
@@ -33,7 +40,7 @@ pandoc -F pandoc-crossref -F custom-table.py README.md -o README.html
 |-------------|
 | Table       |
 
-Table: This is a _complex table_, written in `tables.tex` and `tables.html`. {#tbl:custom-table}
+Table: This is a _complex table_, **written** in `tables.tex` and `tables.html`. {#tbl:custom-table}
 
 See @tbl:custom-table.
 

@@ -216,10 +216,10 @@
 <header id="title-block-header">
 <h1 class="title">Pandoc Filter to Insert Arbitrary Complex Tables</h1>
 </header>
-<h1 id="pandoc-filter-to-insert-arbitrary-complex-tables">Pandoc Filter to Insert Arbitrary Complex Tables</h1>
+<p>Outputs: <a href="https://yongfu.name/pandoc-filter/">Web Page</a> / <a href="https://yongfu.name/pandoc-filter/README.tex">LaTeX</a> / <a href="https://www.overleaf.com/docs?snip_uri=https://yongfu.name/pandoc-filter/README.tex&amp;engine=xelatex">PDF</a> (Overleaf)</p>
 <h2 id="dependencies">Dependencies</h2>
-<p>Make sure you have Pandoc and <a href="https://github.com/lierdakil/pandoc-crossref">pandoc-crossref</a> installed (callable from cmd). In addition, Python 3 and the libraries below are required:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandocfilters, pypandoc</span></code></pre></div>
+<p>Make sure you have Pandoc and <a href="https://github.com/lierdakil/pandoc-crossref">pandoc-crossref</a> installed (callable from cmd). In addition, Python 3 and <a href="https://github.com/jgm/pandocfilters"><code>pandocfilters</code></a> are required:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandocfilters</span></code></pre></div>
 <h2 id="usage">Usage</h2>
 <p>Put complex tables in <code>tables.tex</code> and <code>tables.html</code>. Mark them with <a href="https://github.com/lierdakil/pandoc-crossref">pandoc-crossref</a>’s <code>tbl:table-id</code> syntax in the comments.</p>
 <p>Apply the filter <strong>after</strong> <code>-F pandoc--crossref</code> in the command line.</p>
@@ -227,8 +227,7 @@
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-F</span> pandoc-crossref <span class="at">-F</span> custom-table.py README.md <span class="at">-o</span> README.html</span></code></pre></div>
 <h2 id="example">Example</h2>
 <!-- tbl:custom-table -->
-<table id="tbl:custom-table"><caption>Table 1: This is a <em>complex table</em>, written in <code>tables.tex</code> and <code>tables.html</code>.
-</caption>
+<table id="tbl:custom-table"><caption>Table 1: This is a <em>complex table</em>, <strong>written</strong> in <code>tables.tex</code> and <code>tables.html</code>.</caption>
   <thead>
     <tr>
       <th></th>
