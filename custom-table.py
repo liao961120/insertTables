@@ -78,7 +78,7 @@ def get_custom_tables(format="latex"):
     CUSTOM_TABLES = {}
 
     cmt_s, cmt_e, end = '<!--', '-->', '<!-- END -->'
-    if format == 'latex': cmt_s, cmt_e, end = '%%%%', '%%%%', '%% END %%'
+    if format == 'latex': cmt_s, cmt_e, end = '%', '%', '% END %'
     if format == 'latex': format = 'tex'
     format = 'tables.' + format
     if not os.path.exists(format): return {}
