@@ -9,8 +9,8 @@ header-includes: |
 Outputs: 
 [Web Page](https://yongfu.name/pandoc-filter/) /
 [LaTeX](https://yongfu.name/pandoc-filter/README.tex) /
-[PDF](https://www.overleaf.com/docs?snip_uri=https://yongfu.name/pandoc-filter/README.tex&engine=xelatex)
-(Overleaf)
+[PDF](https://yongfu.name/pandoc-filter/README.pdf) /
+[Overleaf](https://www.overleaf.com/docs?snip_uri=https://yongfu.name/pandoc-filter/README.tex&engine=xelatex)
 
 
 ## Dependencies
