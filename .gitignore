@@ -2,6 +2,7 @@
 __pycache__
 log
 temp*
+test*
 README.json
 README.html
 README.tex
