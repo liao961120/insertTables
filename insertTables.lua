@@ -79,7 +79,7 @@ function stringify(tree, format)
             resolve = stringify(node.content, format)
             result[#result + 1] = writeEmph(resolve, format)
         elseif key == 'Str' or key == 'MetaString' then
-            result[#result + 1] = node.text
+            result[#result + 1] = escape(node.text)
         elseif key == 'RawInline' then
             result[#result + 1] = node.text
         elseif key == 'Code' then
