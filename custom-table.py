@@ -1,6 +1,4 @@
 import os
-# import json
-# import pypandoc
 from pandocfilters import RawBlock, toJSONFilter, walk
 
 
