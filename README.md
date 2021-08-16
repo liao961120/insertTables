@@ -1,6 +1,7 @@
 ---
 title: "Pandoc Filter to Insert Arbitrary Complex Tables"
 linkReferences: true
+tblPrefix: "Table"
 links-as-notes: true
 header-includes: |
     \usepackage{multirow}
@@ -15,12 +16,7 @@ Outputs:
 
 ## Dependencies
 
-Make sure you have Pandoc and [pandoc-crossref][crossref] installed (callable from cmd). 
-In addition, Python 3 and [`pandocfilters`](https://github.com/jgm/pandocfilters) are required:
-
-```bash
-pip install pandocfilters
-```
+Make sure you have Pandoc and [pandoc-crossref][crossref] installed (callable from cmd).
 
 [crossref]: https://github.com/lierdakil/pandoc-crossref
 
@@ -39,8 +35,8 @@ Refer to [pandoc-crossref][crossref] for details of cross referencing tables.
 To compile the documents, apply the filter `custom-table.py` **AFTER** `pandoc--crossref` in the command line.
 
 ```bash
-pandoc -F pandoc-crossref -F custom-table.py README.md -o README.tex
-pandoc -F pandoc-crossref -F custom-table.py README.md -o README.html
+pandoc -F pandoc-crossref --lua-filter insertTables.lua README.md -o README.tex
+pandoc -F pandoc-crossref --lua-filter insertTables.lua README.md -o README.html
 ```
 
 
@@ -61,3 +57,30 @@ A1       | B1
 A2       | B2
 
 Table: This is a normal table written in markdown, which will not be replaced. {#tbl:normal-table}
+
+
+### Custom Caption Positions
+
+By default, `insertTables.lua` looks for the string `\begin{tabular` and inserts the caption before it. In circumstances where `\begin{tabular}` or `\begin{tabularx}` are not present in the table's code, this filter will fail. To deal with these cases, you have to tell `insertTables.lua` where to insert the caption by placing the anchor `%caption%` in your table's code. This may also be useful when you want to place the caption **below** the table body. This can be achieved by placing the anchor `%caption%` **after** the `tabular` environment:
+
+```latex
+\begin{table}[]
+    \centering
+    \begin{tabular}{lllll}
+        \hline
+        \textbf{} & \multicolumn{4}{l}{Column Span} \\ \hline
+        \multirow{2}{*}{Row Span} & a & b & d & f \\
+         & c & d & e & g \\ \hline
+        \end{tabular}
+    %caption%
+\end{table}
+```
+
+which results in @custom-caption-position.
+
+| Placeholder |
+|-------------|
+| Table       |
+
+Table: For LaTeX tables, you can define the position of the caption with the string `%caption%` in `tables.tex`. {#tbl:custom-caption-position}
+
