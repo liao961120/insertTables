@@ -5,6 +5,8 @@ tblPrefix: "Table"
 links-as-notes: true
 header-includes: |
     \usepackage{multirow}
+    \usepackage[normalem]{ulem}
+    \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
 ---
 
 Outputs: 
