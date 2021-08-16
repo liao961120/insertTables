@@ -9,10 +9,12 @@ header-includes: |
 
 Outputs: 
 [Web Page](https://yongfu.name/pandoc-filter/) /
-[LaTeX](https://yongfu.name/pandoc-filter/README.tex) /
-[PDF](https://yongfu.name/pandoc-filter/README.pdf) /
+[LaTeX][tex-o] /
+[PDF][pdf-o] /
 [Overleaf](https://www.overleaf.com/docs?snip_uri=https://yongfu.name/pandoc-filter/README.tex&engine=xelatex)
 
+[tex-o]: https://yongfu.name/pandoc-filter/README.tex
+[pdf-o]: https://yongfu.name/pandoc-filter/README.pdf
 
 ## Dependencies
 
@@ -76,7 +78,7 @@ By default, `insertTables.lua` looks for the string `\begin{tabular` and inserts
 \end{table}
 ```
 
-which results in @custom-caption-position.
+which results in @tbl:custom-caption-position (this could only be seen in [tex][tex-o] or [PDF][pdf-o] output).
 
 | Placeholder |
 |-------------|
