@@ -29,6 +29,7 @@ end
 
 
 function create_raw_table(table_text, caption, tbl_id, format)
+    caption = escape_pattern(caption)
     if format == "latex" then
         caption = '\\caption{' .. caption .. '}'
         
@@ -82,7 +83,7 @@ function stringify(tree, format)
         elseif key == 'RawInline' then
             result[#result + 1] = node.text
         elseif key == 'Code' then
-            result[#result + 1] = writeCode(node.text, format)
+            result[#result + 1] = writeCode(escape(node.text), format)
         elseif key == 'Math' then
             result[#result + 1] = writeMath(node.text, format)
         elseif key == 'Space' or key == "SoftBreak" or key == "LineBreak" then
@@ -97,6 +98,10 @@ function stringify(tree, format)
 end
 
 -- Writer functions
+function escape(x)
+    if format ~= 'latex' then return x end
+    return x:gsub("%%", "\\%1")
+end
 function writeStrong(x, format)
     if format == 'latex' or format == 'tex' then return '\\textbf{' .. x .. '}' end
     if format == 'html' then return '<strong>' .. x .. '</strong>' end
@@ -159,6 +164,10 @@ end
 
 
 -- Helper functions
+function escape_pattern(text)
+    return text:gsub("%%", "%%%1")
+end
+
 local function starts_with(start, str)
     return str:sub(1, #start) == start
   end
