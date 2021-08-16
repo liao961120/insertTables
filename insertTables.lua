@@ -45,9 +45,9 @@ function create_raw_table(table_text, caption, tbl_id)
         end
         return string.gsub(table_text, tgt, repl)
     elseif format == 'html' then
-        caption = '<caption>' .. caption .. '</caption>'
-        tgt = '<table>'
-        repl = '<table id="' .. tbl_id .. '">' .. caption
+        caption = '<caption id="' .. tbl_id .. '">'.. caption .. '</caption>'
+        tgt = '</table>'
+        repl = caption .. tgt
         return string.gsub(table_text, tgt, repl)
     end
     return "UNDEFINED_FORMAT"

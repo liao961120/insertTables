@@ -227,7 +227,7 @@
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-F</span> pandoc-crossref <span class="at">--lua-filter</span> insertTables.lua README.md <span class="at">-o</span> README.html</span></code></pre></div>
 <h2 id="example">Example</h2>
 <!-- tbl:custom-table -->
-<table id="tbl:custom-table"><caption>Table 1: This is a <em>complex table</em>, <strong>written</strong> in <code>tables.tex</code> and <code>tables.html</code>.</caption>
+<table>
   <thead>
     <tr>
       <th></th>
@@ -249,7 +249,7 @@
       <td>g</td>
     </tr>
   </tbody>
-  </table>
+  <caption id="tbl:custom-table">Table 1: This is a <em>complex table</em>, <strong>written</strong> in <code>tables.tex</code> and <code>tables.html</code>.</caption></table>
 <!-- END -->
 
 
