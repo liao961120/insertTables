@@ -16,11 +16,11 @@ end
 function Div(el)
     if format == nil then return nil end
     -- Insert table defined in tables.tex/tables.html
-    get_custom_tables(table_fp, format)
+    get_custom_tables(table_fp)
     local table = CUSTOM_TABLES[el.identifier]
     if table ~= nil then
-        caption = get_caption(el.content[1], format)
-        table = create_raw_table(table, caption, el.identifier, format)
+        caption = get_caption(el.content[1])
+        table = create_raw_table(table, caption, el.identifier)
         return pandoc.RawBlock(format, table)
     end
 
@@ -28,7 +28,7 @@ function Div(el)
 end
 
 
-function create_raw_table(table_text, caption, tbl_id, format)
+function create_raw_table(table_text, caption, tbl_id)
     caption = escape_pattern(caption)
     if format == "latex" then
         caption = '\\caption{' .. caption .. '}'
@@ -54,45 +54,45 @@ function create_raw_table(table_text, caption, tbl_id, format)
 end
 
 
-function get_caption(table, format)
+function get_caption(table)
     for k, v in pairs(table) do
         if k == 'caption' then
-            return stringify(v.long[1].content, format)
+            return stringify(v.long[1].content)
         end
     end
     return ""
 end
 
 -- Write a parital tree to string, with formats
-function stringify(tree, format)
+function stringify(tree)
     local result = {}
     -- Process each node
-    local function go(node, format)
+    local function go(node)
         key = node.tag
         if key == 'Plain' then
-            resolve = stringify(node.content, format)
+            resolve = stringify(node.content)
             result[#result + 1] = resolve
         elseif key == 'Strong' then
-            resolve = stringify(node.content, format)
-            result[#result + 1] = writeStrong(resolve, format)
+            resolve = stringify(node.content)
+            result[#result + 1] = writeStrong(resolve)
         elseif key == 'Emph' then
-            resolve = stringify(node.content, format)
-            result[#result + 1] = writeEmph(resolve, format)
+            resolve = stringify(node.content)
+            result[#result + 1] = writeEmph(resolve)
         elseif key == 'Str' or key == 'MetaString' then
             result[#result + 1] = escape(node.text)
         elseif key == 'RawInline' then
             result[#result + 1] = node.text
         elseif key == 'Code' then
-            result[#result + 1] = writeCode(escape(node.text), format)
+            result[#result + 1] = writeCode(escape(node.text))
         elseif key == 'Math' then
-            result[#result + 1] = writeMath(node.text, format)
+            result[#result + 1] = writeMath(node.text)
         elseif key == 'Space' or key == "SoftBreak" or key == "LineBreak" then
             result[#result + 1] = " "
         end
     end
     -- Walk tree
     for k, v in pairs(tree) do
-        go(v, format)
+        go(v)
     end
     return table.concat(result)
 end
@@ -102,25 +102,25 @@ function escape(x)
     if format ~= 'latex' then return x end
     return x:gsub("%%", "\\%1")
 end
-function writeStrong(x, format)
+function writeStrong(x)
     if format == 'latex' or format == 'tex' then return '\\textbf{' .. x .. '}' end
     if format == 'html' then return '<strong>' .. x .. '</strong>' end
     if format == 'markdown' then return "**" .. x .. "**" end
     return x
 end
-function writeEmph(x, format)
+function writeEmph(x)
     if format == 'latex' or format == 'tex' then return '\\emph{' .. x .. '}' end
     if format == 'html' then return '<em>' .. x .. '</em>' end
     if format == 'markdown' then return "*" .. x .. "*" end
     return x
 end
-function writeCode(x, format)
+function writeCode(x)
     if format == 'latex' or format == 'tex' then return '\\texttt{' .. x .. '}' end
     if format == 'html' then return "<code>" .. x .. "</code>" end
     if format == 'markdown' then return "`" .. x .. "`" end
     return x
 end
-function writeMath(x, format)
+function writeMath(x)
     if format == 'latex' or format == 'tex' then return '\\(' .. x .. '\\)' end
     if format == 'html' then return '<span class="math inline">' .. x .. '</span>' end
     if format == 'markdown' then return "$" .. x .. "$" end
@@ -129,7 +129,7 @@ end
 
 
 -- Read raw table text from tables.tex/tables.html
-function get_custom_tables(file, format)
+function get_custom_tables(file)
     if not table.empty(CUSTOM_TABLES) then return nil end
     if not file_exists(file) then return nil end
 
