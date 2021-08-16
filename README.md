@@ -8,13 +8,13 @@ header-includes: |
 ---
 
 Outputs: 
-[Web Page](https://yongfu.name/pandoc-filter/) /
+[Web Page](https://yongfu.name/insertTables/) /
 [LaTeX][tex-o] /
 [PDF][pdf-o] /
-[Overleaf](https://www.overleaf.com/docs?snip_uri=https://yongfu.name/pandoc-filter/README.tex&engine=xelatex)
+[Overleaf](https://www.overleaf.com/docs?snip_uri=https://yongfu.name/insertTables/README.tex&engine=xelatex)
 
-[tex-o]: https://yongfu.name/pandoc-filter/README.tex
-[pdf-o]: https://yongfu.name/pandoc-filter/README.pdf
+[tex-o]: https://yongfu.name/insertTables/README.tex
+[pdf-o]: https://yongfu.name/insertTables/README.pdf
 
 ## Dependencies
 
