@@ -278,7 +278,7 @@
 </div>
 <h3 id="custom-caption-positions">Custom Caption Positions</h3>
 <p>By default, <code>insertTables.lua</code> looks for the string <code>\begin{tabular</code> and inserts the caption before it. In circumstances where <code>\begin{tabular}</code> or <code>\begin{tabularx}</code> are not present in the table’s code, this filter will fail. To deal with these cases, you have to tell <code>insertTables.lua</code> where to insert the caption by placing the anchor <code>%caption%</code> in your table’s code. This may also be useful when you want to place the caption <strong>below</strong> the table body. This can be achieved by placing the anchor <code>%caption%</code> <strong>after</strong> the <code>tabular</code> environment:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode latex"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">table</span>}[]</span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode latex"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">table</span>}[!htb]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\centering</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\begin</span>{<span class="ex">tabular</span>}{lllll}</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">\hline</span></span>

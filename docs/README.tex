@@ -185,8 +185,7 @@ To compile the documents, apply the filter \texttt{custom-table.py}
 \subsection{Example}\label{example}}
 
 %%%%%%% tbl:custom-table %%%%%%%%
-% \usepackage{multirow}
-\begin{table}[]
+\begin{table}[!htb]
     \centering
     \caption{\label{tbl:custom-table}This is a \emph{complex table}, \textbf{written} in \texttt{tables.tex} and \texttt{tables.html}.}
 \begin{tabular}{lllll}
@@ -234,7 +233,7 @@ This can be achieved by placing the anchor \texttt{\%caption\%}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{table}\NormalTok{\}[]}
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{table}\NormalTok{\}[!htb]}
     \FunctionTok{\textbackslash{}centering}
     \KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{tabular}\NormalTok{\}\{lllll\}}
         \FunctionTok{\textbackslash{}hline}
@@ -252,8 +251,7 @@ only be seen in \href{https://yongfu.name/pandoc-filter/README.tex}{tex}
 or \href{https://yongfu.name/pandoc-filter/README.pdf}{PDF} output).
 
 %%%%%%% tbl:custom-caption-position %%%%%%%%
-% \usepackage{multirow}
-\begin{table}[]
+\begin{table}[!htb]
     \centering
     \begin{tabular}{lllll}
         \hline

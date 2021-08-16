@@ -66,7 +66,7 @@ Table: This is a normal table written in markdown, which will not be replaced. {
 By default, `insertTables.lua` looks for the string `\begin{tabular` and inserts the caption before it. In circumstances where `\begin{tabular}` or `\begin{tabularx}` are not present in the table's code, this filter will fail. To deal with these cases, you have to tell `insertTables.lua` where to insert the caption by placing the anchor `%caption%` in your table's code. This may also be useful when you want to place the caption **below** the table body. This can be achieved by placing the anchor `%caption%` **after** the `tabular` environment:
 
 ```latex
-\begin{table}[]
+\begin{table}[!htb]
     \centering
     \begin{tabular}{lllll}
         \hline
