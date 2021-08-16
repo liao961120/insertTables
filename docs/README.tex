@@ -150,15 +150,7 @@ Outputs: \href{https://yongfu.name/pandoc-filter/}{Web Page} /
 
 Make sure you have Pandoc and
 \href{https://github.com/lierdakil/pandoc-crossref}{pandoc-crossref}
-installed (callable from cmd). In addition, Python 3 and
-\href{https://github.com/jgm/pandocfilters}{\texttt{pandocfilters}} are
-required:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ExtensionTok{pip}\NormalTok{ install pandocfilters}
-\end{Highlighting}
-\end{Shaded}
+installed (callable from cmd).
 
 \hypertarget{usage}{%
 \subsection{Usage}\label{usage}}
@@ -184,8 +176,8 @@ To compile the documents, apply the filter \texttt{custom-table.py}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{pandoc} \AttributeTok{{-}F}\NormalTok{ pandoc{-}crossref }\AttributeTok{{-}F}\NormalTok{ custom{-}table.py README.md }\AttributeTok{{-}o}\NormalTok{ README.tex}
-\ExtensionTok{pandoc} \AttributeTok{{-}F}\NormalTok{ pandoc{-}crossref }\AttributeTok{{-}F}\NormalTok{ custom{-}table.py README.md }\AttributeTok{{-}o}\NormalTok{ README.html}
+\ExtensionTok{pandoc} \AttributeTok{{-}F}\NormalTok{ pandoc{-}crossref }\AttributeTok{{-}{-}lua{-}filter}\NormalTok{ insertTables.lua README.md }\AttributeTok{{-}o}\NormalTok{ README.tex}
+\ExtensionTok{pandoc} \AttributeTok{{-}F}\NormalTok{ pandoc{-}crossref }\AttributeTok{{-}{-}lua{-}filter}\NormalTok{ insertTables.lua README.md }\AttributeTok{{-}o}\NormalTok{ README.html}
 \end{Highlighting}
 \end{Shaded}
 
@@ -204,8 +196,9 @@ To compile the documents, apply the filter \texttt{custom-table.py}
          & c & d & e & g \\ \hline
         \end{tabular}
 \end{table}
+%%%%%%% END %%%%%%%%
 
-See tbl.~\ref{tbl:custom-table}.
+See Table~\ref{tbl:custom-table}.
 
 \hypertarget{tbl:normal-table}{}
 \begin{longtable}[]{@{}ll@{}}
@@ -223,5 +216,51 @@ A1 & B1 \\
 A2 & B2 \\
 \bottomrule
 \end{longtable}
+
+\hypertarget{custom-caption-positions}{%
+\subsubsection{Custom Caption
+Positions}\label{custom-caption-positions}}
+
+By default, \texttt{insertTables.lua} looks for the string
+\texttt{\textbackslash{}begin\{tabular} and inserts the caption before
+it. In circumstances where \texttt{\textbackslash{}begin\{tabular\}} or
+\texttt{\textbackslash{}begin\{tabularx\}} are not present in the
+table's code, this filter will fail. To deal with these cases, you have
+to tell \texttt{insertTables.lua} where to insert the caption by placing
+the anchor \texttt{\%caption\%} in your table's code. This may also be
+useful when you want to place the caption \textbf{below} the table body.
+This can be achieved by placing the anchor \texttt{\%caption\%}
+\textbf{after} the \texttt{tabular} environment:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{table}\NormalTok{\}[]}
+    \FunctionTok{\textbackslash{}centering}
+    \KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{tabular}\NormalTok{\}\{lllll\}}
+        \FunctionTok{\textbackslash{}hline}
+        \FunctionTok{\textbackslash{}textbf}\NormalTok{\{\} }\OperatorTok{\&} \FunctionTok{\textbackslash{}multicolumn}\NormalTok{\{4\}\{l\}\{Column Span\} }\FunctionTok{\textbackslash{}\textbackslash{}} \FunctionTok{\textbackslash{}hline}
+        \FunctionTok{\textbackslash{}multirow}\NormalTok{\{2\}\{*\}\{Row Span\} }\OperatorTok{\&}\NormalTok{ a }\OperatorTok{\&}\NormalTok{ b }\OperatorTok{\&}\NormalTok{ d }\OperatorTok{\&}\NormalTok{ f }\FunctionTok{\textbackslash{}\textbackslash{}}
+         \OperatorTok{\&}\NormalTok{ c }\OperatorTok{\&}\NormalTok{ d }\OperatorTok{\&}\NormalTok{ e }\OperatorTok{\&}\NormalTok{ g }\FunctionTok{\textbackslash{}\textbackslash{}} \FunctionTok{\textbackslash{}hline}
+        \KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{tabular}\NormalTok{\}}
+    \CommentTok{\%caption\%}
+\KeywordTok{\textbackslash{}end}\NormalTok{\{}\ExtensionTok{table}\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+which results in {[}@custom-caption-position{]}.
+
+%%%%%%% tbl:custom-caption-position %%%%%%%%
+% \usepackage{multirow}
+\begin{table}[]
+    \centering
+    \begin{tabular}{lllll}
+        \hline
+        \textbf{} & \multicolumn{4}{l}{Column Span} \\ \hline
+        \multirow{2}{*}{Row Span} & a & b & d & f \\
+         & c & d & e & g \\ \hline
+        \end{tabular}
+    \caption{\label{tbl:custom-caption-position}For LaTeX tables, you can define the position of the caption with the string \texttt{\%caption\%} in \texttt{tables.tex}.}
+\end{table}
+%%%%%%% END %%%%%%%%
 
 \end{document}

@@ -219,13 +219,12 @@
 </header>
 <p>Outputs: <a href="https://yongfu.name/pandoc-filter/">Web Page</a> / <a href="https://yongfu.name/pandoc-filter/README.tex">LaTeX</a> / <a href="https://yongfu.name/pandoc-filter/README.pdf">PDF</a> / <a href="https://www.overleaf.com/docs?snip_uri=https://yongfu.name/pandoc-filter/README.tex&amp;engine=xelatex">Overleaf</a></p>
 <h2 id="dependencies">Dependencies</h2>
-<p>Make sure you have Pandoc and <a href="https://github.com/lierdakil/pandoc-crossref">pandoc-crossref</a> installed (callable from cmd). In addition, Python 3 and <a href="https://github.com/jgm/pandocfilters"><code>pandocfilters</code></a> are required:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandocfilters</span></code></pre></div>
+<p>Make sure you have Pandoc and <a href="https://github.com/lierdakil/pandoc-crossref">pandoc-crossref</a> installed (callable from cmd).</p>
 <h2 id="usage">Usage</h2>
 <p>Write your complex tables in HTML in <code>tables.html</code> and in LaTeX in <code>tables.tex</code>. <a href="https://tablesgenerator.com" class="uri">https://tablesgenerator.com</a> is a good resource for constructing complex tables. To insert tables into the output HTML/LaTeX document, use the syntax <code>&lt;COMMENT&gt; tbl:table-id &lt;COMMENT&gt;</code> to mark the beginning and <code>&lt;COMMENT&gt; END &lt;COMMENT&gt;</code> to mark the end of a table definition in <code>tables.html</code> and <code>tables.tex</code>. <code>&lt;COMMENT&gt;</code> corresponds to <code>%</code> in LaTeX and <code>&lt;!--</code> and <code>--&gt;</code> in HTML. <code>tbl:table-id</code> is the identifier of the table used for cross-referencing in the markdown source. Refer to <a href="https://github.com/lierdakil/pandoc-crossref">pandoc-crossref</a> for details of cross referencing tables.</p>
 <p>To compile the documents, apply the filter <code>custom-table.py</code> <strong>AFTER</strong> <code>pandoc--crossref</code> in the command line.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-F</span> pandoc-crossref <span class="at">-F</span> custom-table.py README.md <span class="at">-o</span> README.tex</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-F</span> pandoc-crossref <span class="at">-F</span> custom-table.py README.md <span class="at">-o</span> README.html</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-F</span> pandoc-crossref <span class="at">--lua-filter</span> insertTables.lua README.md <span class="at">-o</span> README.tex</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-F</span> pandoc-crossref <span class="at">--lua-filter</span> insertTables.lua README.md <span class="at">-o</span> README.html</span></code></pre></div>
 <h2 id="example">Example</h2>
 <!-- tbl:custom-table -->
 <table id="tbl:custom-table"><caption>Table 1: This is a <em>complex table</em>, <strong>written</strong> in <code>tables.tex</code> and <code>tables.html</code>.</caption>
@@ -251,8 +250,11 @@
     </tr>
   </tbody>
   </table>
+<!-- END -->
 
-<p>See tbl. <a href="#tbl:custom-table">1</a>.</p>
+
+
+<p>See Table <a href="#tbl:custom-table">1</a>.</p>
 <div id="tbl:normal-table">
 <table>
 <caption>Table 2: This is a normal table written in markdown, which will not be replaced.</caption>
@@ -270,6 +272,34 @@
 <tr class="even">
 <td>A2</td>
 <td>B2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="custom-caption-positions">Custom Caption Positions</h3>
+<p>By default, <code>insertTables.lua</code> looks for the string <code>\begin{tabular</code> and inserts the caption before it. In circumstances where <code>\begin{tabular}</code> or <code>\begin{tabularx}</code> are not present in the table’s code, this filter will fail. To deal with these cases, you have to tell <code>insertTables.lua</code> where to insert the caption by placing the anchor <code>%caption%</code> in your table’s code. This may also be useful when you want to place the caption <strong>below</strong> the table body. This can be achieved by placing the anchor <code>%caption%</code> <strong>after</strong> the <code>tabular</code> environment:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode latex"><code class="sourceCode latex"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">table</span>}[]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">\centering</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\begin</span>{<span class="ex">tabular</span>}{lllll}</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">\hline</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">\textbf</span>{} <span class="op">&amp;</span> <span class="fu">\multicolumn</span>{4}{l}{Column Span} <span class="fu">\\</span> <span class="fu">\hline</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">\multirow</span>{2}{*}{Row Span} <span class="op">&amp;</span> a <span class="op">&amp;</span> b <span class="op">&amp;</span> d <span class="op">&amp;</span> f <span class="fu">\\</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>         <span class="op">&amp;</span> c <span class="op">&amp;</span> d <span class="op">&amp;</span> e <span class="op">&amp;</span> g <span class="fu">\\</span> <span class="fu">\hline</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">\end</span>{<span class="ex">tabular</span>}</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">%caption%</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">table</span>}</span></code></pre></div>
+<p>which results in <span class="citation" data-cites="custom-caption-position">[@custom-caption-position]</span>.</p>
+<div id="tbl:custom-caption-position">
+<table>
+<caption>Table 3: For LaTeX tables, you can define the position of the caption with the string <code>%caption%</code> in <code>tables.tex</code>.</caption>
+<thead>
+<tr class="header">
+<th>Placeholder</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Table</td>
 </tr>
 </tbody>
 </table>
