@@ -4,10 +4,10 @@ format = nil
 -- Set up global variables
 if FORMAT:match 'latex' then
     format = 'latex'
-    table_fp = 'tables.tex'
+    table_fp = 'chapters/tables.tex'
 elseif FORMAT:match 'html' then
     format = 'html'
-    table_fp = 'tables.html'
+    table_fp = 'chapters/tables.html'
 else
     print("Not latex nor html, skipping filter...")
 end
@@ -40,8 +40,8 @@ function create_raw_table(table_text, caption, tbl_id)
         else
             -- Default caption position 
                -- (not guaranteed to work in all cases)
-            tgt = '\\begin{tabular'
-            repl = caption .. "\n" .. tgt
+            tgt = [[ \begin{table}[] ]]
+            repl = tgt .. "\n" .. caption
         end
         return string.gsub(table_text, tgt, repl)
     elseif format == 'html' then
@@ -139,6 +139,7 @@ function writeMath(x)
     if format == 'markdown' then return "$" .. x .. "$" end
     return x
 end
+
 
 
 -- Read raw table text from tables.tex/tables.html
